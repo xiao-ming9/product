@@ -61,3 +61,7 @@ Route::get('/search','SearchController@search');
 
 //商品详情
 Route::get('/detail','SearchController@detail');
+//返回首页商品分类
+Route::get('/type','SearchController@type');
+
+//Route::get('/a','SearchController@a');

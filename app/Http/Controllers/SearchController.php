@@ -147,4 +147,47 @@ class SearchController extends BaseController
         $good = Good::findOrFail($id);
         return returnMsg('200','ok',$good);
     }
+
+    /**
+     * 首页商品分类
+     */
+    public function type()
+    {
+        $allTypeName = [];
+        $type = Type::all();
+        foreach($type as $v){
+            $typeName[] = $v->name;
+        }
+        for($i=1;$i<=10;$i++){
+            $secondType = SecondType::where('type_id',$i)->get();
+            foreach($secondType as $v){
+                $secondTypeName = array(
+                    $typeName[$i-1] => array($v->name)
+                );
+                array_push($secondTypeName,$allTypeName);
+                $allTypeName[$typeName[$i-1]][$v->name] = arrry(
+                    $v->thirdType->name
+                );
+            }
+        }
+        return $this->returnMsg('200','ok',$allTypeName);
+    }
+    // public function a(){
+    //     $b = array("abc","acb","cba");
+    //     $d = array('a','b','c');
+    //     $a = [];
+    //     for($i=1;$i<4;$i++){
+    //         foreach($d as $v){
+    //             $c = array(
+    //                 $b[$i-1] => array($v)
+    //             );
+    //             array_push($c,$a);
+    //             $a[$b[$i-1]][$v] = array(
+    //                 "www".$i,"qqq".$i,"aaa".$i
+    //             );
+    //         }
+           
+    //     }
+    //     var_dump($a);
+    // }
 }
