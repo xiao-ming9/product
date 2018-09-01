@@ -17,21 +17,21 @@ class UserController extends BaseController
     {
         //可能存在问题，有问题则换成$this->validate
         //表单验证
-        $this->validate($request,[
-            'username'=>'required|unique:users',
-            'password'=>'required',
-            'contact'=>'required',
-            'phone'=>'required',
-            'email'=>'required|email'
-        ],[
-            'username.required'=>'用户名不能为空',
-            'username.unique'=>'用户名已存在',
-            'password.required'=>'密码不能为空',
-            'contact.required'=>'联系人不能为空',
-            'phone.required'=>'联系方式不能为空',
-            'email.required'=>'邮箱地址不能为空',
-            'email.email'=>'邮箱格式不正确'
-        ]);
+        // $this->validate($request,[
+        //     'username'=>'required|unique:users',
+        //     'password'=>'required',
+        //     'contact'=>'required',
+        //     'phone'=>'required',
+        //     'email'=>'required|email'
+        // ],[
+        //     'username.required'=>'用户名不能为空',
+        //     'username.unique'=>'用户名已存在',
+        //     'password.required'=>'密码不能为空',
+        //     'contact.required'=>'联系人不能为空',
+        //     'phone.required'=>'联系方式不能为空',
+        //     'email.required'=>'邮箱地址不能为空',
+        //     'email.email'=>'邮箱格式不正确'
+        // ]);
         //数据插入
         $user = new User;
         $user->username = $request->input('username');
