@@ -142,10 +142,10 @@ class SearchController extends BaseController
     {
         $id = $request->query('id');
         if(!$id){
-            return returnMsg('5005','lack param id');
+            return $this->returnMsg('5005','lack param id');
         }
         $good = Good::findOrFail($id);
-        return returnMsg('200','ok',$good);
+        return $this->returnMsg('200','ok',$good);
     }
 
     /**

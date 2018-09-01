@@ -17,7 +17,7 @@ class UserController extends BaseController
     {
         //可能存在问题，有问题则换成$this->validate
         //表单验证
-        $request->validate([
+        $this->validate($request,[
             'username'=>'required|unique:users',
             'password'=>'required',
             'contact'=>'required',
