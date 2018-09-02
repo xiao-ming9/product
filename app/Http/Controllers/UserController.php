@@ -51,7 +51,8 @@ class UserController extends BaseController
     public function login(Request $request)
     {
         //实例化用户对象
-        $user = User::where('username',$request->username)->get();
+        $user = User::where('username',$request->username)->firstOrFail();
+        //$user = User::where('username',$request->input('username'))->findOrFail();
         //判断该用户是否已经注册
         if(!empty($user)){
             //检查密码是否正确
