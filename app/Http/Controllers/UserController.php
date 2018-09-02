@@ -56,8 +56,6 @@ class UserController extends BaseController
         if(!empty($user)){
             //检查密码是否正确
             if(Hash::check($request->password,$user->password)){
-                //写入登入状态
-                session(['uid'=>$user->id]);
                 return $this->returnMsg('200','ok',$user);
             }else{
                 return $this->returnMsg('500','wrong password',[]);
