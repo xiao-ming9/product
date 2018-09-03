@@ -24,22 +24,19 @@ Route::post('/login','UserController@login');
 //用户注销登录
 Route::get('/logout','UserController@logout');
 
-//路由分组
-Route::group(['middleware'=>['login']], function() {
-    /**
-     * 合作及技术咨询
-     * 需要用户先进行登录
-     */
-    Route::post('/coop','UserController@cooperate');
-    Route::post('/skill','UserController@skill');
-    Route::post('/connect','UserController@connect');
+/**
+ * 合作及技术咨询
+ * 需要用户先进行登录
+ */
+Route::post('/coop','UserController@cooperate');
+Route::post('/skill','UserController@skill');
+Route::post('/connect','UserController@connect');
 
-    /**
-     * 用户个人信息
-     * 需要先登录
-     */
-    Route::get('/me','UserController@show');
-});
+/**
+ * 用户个人信息
+ * 需要先登录
+ */
+Route::get('/me','UserController@show');
 
 //新品推荐
 Route::get('/newgood','InfoController@newGood');
