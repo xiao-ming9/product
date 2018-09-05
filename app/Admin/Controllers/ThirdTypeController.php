@@ -85,7 +85,7 @@ class ThirdTypeController extends Controller
         $grid->id('Id');
         $grid->name('三级分类名称'); 
         //$grid->type_id('Type id');
-        $grid->secondType('父级分类')->name();
+        $grid->secondType('父级分类')->name('父级分类');
         $grid->created_at('Created at');
         $grid->updated_at('Updated at');
 
