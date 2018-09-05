@@ -16,7 +16,7 @@ class CreateThirdTypesTable extends Migration
         Schema::create('third_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->integer('type_id')->nullable();
+            //$table->integer('type_id')->nullable();
             $table->integer('secondtype_id');
             $table->timestamps();
         });
