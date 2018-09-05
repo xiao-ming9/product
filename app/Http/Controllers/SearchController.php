@@ -158,19 +158,18 @@ class SearchController extends BaseController
         foreach($type as $v){
             $typeName[] = $v->name;
         }
+        foreach($typeName as $k=>$v){
+            $allTypeName += [$v=>[]];
+        }
         for($i=1;$i<=10;$i++){
             $secondType = SecondType::where('type_id',$i)->get();
             foreach($secondType as $v){
-                $secondTypeName = array(
-                    $typeName[$i-1] => array($v->name)
-                );
-                array_push($allTypeName,$secondTypeName);
+                $name = $typeName[$i-1];
+                $allTypeName[$name] += [$v->name=>[]]; 
                 $thirdTypes = $v->thirdType;
                 foreach($thirdTypes as $thirdType){
-                    $allTypeName[$typeName[$i-1]][$v->name] = array(
-                        $thirdType->name
-                    );
-                }
+                     $allTypeName[$name][$v->name] += [$thirdType->name];
+                 }
             }
         }
         dd($allTypeName);
