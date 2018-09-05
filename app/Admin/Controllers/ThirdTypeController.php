@@ -129,7 +129,7 @@ class ThirdTypeController extends Controller
         $form->text('name', '三级分类名称');
         $form->select('secondtype_id','父级分类')->options('/api/thirdtype');
         //$form->number('secondtype_id', 'Secondtype id');
-        //$form->number('type_id', 'Type id');
+        $form->hidden('type_id')->value(null);
         return $form;
     }
 }
