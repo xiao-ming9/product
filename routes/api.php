@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\SecondType;
+use App\ThirdType;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +17,7 @@ use Illuminate\Http\Request;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+Route::get('/thirdtype',function(){
+    return SecondType::get(['id','name']);
 });

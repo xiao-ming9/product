@@ -131,6 +131,7 @@ return [
             'image' => 'images',
             'file'  => 'files',
         ],
+        'host' => 'http://localhost:8000/upload/',
     ],
 
     /*

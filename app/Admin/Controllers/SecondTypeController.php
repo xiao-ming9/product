@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers;
 
-use App\User;
+use App\SecondType;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Form;
@@ -10,8 +10,7 @@ use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 
-
-class UserController extends Controller
+class SecondTypeController extends Controller
 {
     use HasResourceActions;
 
@@ -24,7 +23,7 @@ class UserController extends Controller
     public function index(Content $content)
     {
         return $content
-            ->header('用户')
+            ->header('二级分类')
             ->description('')
             ->body($this->grid());
     }
@@ -54,7 +53,7 @@ class UserController extends Controller
     public function edit($id, Content $content)
     {
         return $content
-            ->header('编辑')
+            ->header('修改')
             ->description('')
             ->body($this->form()->edit($id));
     }
@@ -80,15 +79,22 @@ class UserController extends Controller
      */
     protected function grid()
     {
-        $grid = new Grid(new User);
-
-        $grid->id('Id')->sortable();//可排序
-        $grid->username('用户名');
-        $grid->password('密码');
-        $grid->contact('联系人');
-        $grid->email('邮箱');
-        $grid->phone('电话号码');
-        $grid->remember_token('Remember token');
+        $grid = new Grid(new SecondType);
+        $grid->id('Id');
+        $grid->name('名称');
+        $grid->type_id('父级分类')->using([
+             1 => '容器',
+             2 => '计量器具/实验器具/耗材', 
+             3 => '实验用品/材料/试剂',
+             4 => '通用仪器/实验仪器',
+             5 => '理化前处理',
+             6 => '理化分析',
+             7 => '环境检测与分析',
+             8 => '工业微生物检测',
+             9 => '临床诊断',
+             10 => '个人防护产品系列'
+            ]);
+        //$grid->type_id('Type id');
         $grid->created_at('Created at');
         $grid->updated_at('Updated at');
 
@@ -103,15 +109,11 @@ class UserController extends Controller
      */
     protected function detail($id)
     {
-        $show = new Show(User::findOrFail($id));
-
-        $show->id('Id')->sortable();//可排序
-        $show->username('用户名');
-        $show->password('密码');
-        $show->contact('联系人');
-        $show->email('邮箱');
-        $show->phone('电话号码');
-        $show->remember_token('Remember token');
+        $show = new Show(SecondType::findOrFail($id));
+        
+        $show->id('Id');
+        $show->name('Name');
+        $show->type_id('Type id');
         $show->created_at('Created at');
         $show->updated_at('Updated at');
 
@@ -125,13 +127,21 @@ class UserController extends Controller
      */
     protected function form()
     {
-        $form = new Form(new User);
-
-        $form->text('contact', '联系人');
-        $form->email('email', '邮箱');
-        $form->password('password', '密码');
-        $form->number('phone', '手机号码');
-        $form->text('username', '用户名');
+        $form = new Form(new SecondType);
+        $form->text('name', '名称');
+        $form->select('type_id','父级分类')->options([
+             1 => '容器',
+             2 => '计量器具/实验器具/耗材', 
+             3 => '实验用品/材料/试剂',
+             4 => '通用仪器/实验仪器',
+             5 => '理化前处理',
+             6 => '理化分析',
+             7 => '环境检测与分析',
+             8 => '工业微生物检测',
+             9 => '临床诊断',
+             10 => '个人防护产品系列'
+            ]);
+        //$form->number('type_id', '一级分类');
 
         return $form;
     }

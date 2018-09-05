@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Good;
 use App\Type;
+use App\Info;
 
-class InfoController extends Controller
+class InfoController extends BaseController
 {
     //新品推荐
     public function newGood()
@@ -32,7 +33,7 @@ class InfoController extends Controller
     //公告
     public function notice()
     {
-        $notices = Notice::where('type',0)
+        $notices = Info::where('type',0)
                     ->orderBy('updated_at','desc')
                     ->get();
         return $this->returnMsg('200','ok',$notices);
@@ -40,7 +41,7 @@ class InfoController extends Controller
     //尖端科技
     public function tech()
     {
-        $tech = Notice::where('type',1)
+        $tech = Info::where('type',1)
                     ->orderBy('updated_at','desc')
                     ->get();
         return $this->returnMsg('200','ok',$tech);
@@ -48,7 +49,7 @@ class InfoController extends Controller
     //网络研讨会
     public function web()
     {
-        $web = Notice::where('type',2)
+        $web = Info::where('type',2)
                     ->orderBy('updated_at','desc')
                     ->get();
         return $this->returnMsg('200','ok',$web);
@@ -56,7 +57,7 @@ class InfoController extends Controller
     //食药咨询
     public function food()
     {
-        $food = Notice::where('type',3)
+        $food = Info::where('type',3)
                     ->orderBy('updated_at','desc')
                     ->get();
         return $this->returnMsg('200','ok',$food);
@@ -64,7 +65,7 @@ class InfoController extends Controller
     //最新应用
     public function newApp()
     {
-        $newApp = Notice::where('type',4)
+        $newApp = Info::where('type',4)
                     ->orderBy('updated_at','desc')
                     ->get();
         return $this->returnMsg('200','ok',$newApp);

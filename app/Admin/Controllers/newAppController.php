@@ -2,7 +2,7 @@
 
 namespace App\Admin\Controllers;
 
-use App\User;
+use App\Info;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Form;
@@ -10,8 +10,7 @@ use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 
-
-class UserController extends Controller
+class newAppController extends Controller
 {
     use HasResourceActions;
 
@@ -24,7 +23,7 @@ class UserController extends Controller
     public function index(Content $content)
     {
         return $content
-            ->header('用户')
+            ->header('最新应用')
             ->description('')
             ->body($this->grid());
     }
@@ -80,15 +79,13 @@ class UserController extends Controller
      */
     protected function grid()
     {
-        $grid = new Grid(new User);
-
-        $grid->id('Id')->sortable();//可排序
-        $grid->username('用户名');
-        $grid->password('密码');
-        $grid->contact('联系人');
-        $grid->email('邮箱');
-        $grid->phone('电话号码');
-        $grid->remember_token('Remember token');
+        $grid = new Grid(new Info);
+        $grid->model()->where('type',4);
+        $grid->id('Id');
+        $grid->title('标题');
+        $grid->content('内容');
+        //$grid->type('Type');
+        $grid->file('文件');
         $grid->created_at('Created at');
         $grid->updated_at('Updated at');
 
@@ -103,15 +100,13 @@ class UserController extends Controller
      */
     protected function detail($id)
     {
-        $show = new Show(User::findOrFail($id));
+        $show = new Show(Info::findOrFail($id));
 
-        $show->id('Id')->sortable();//可排序
-        $show->username('用户名');
-        $show->password('密码');
-        $show->contact('联系人');
-        $show->email('邮箱');
-        $show->phone('电话号码');
-        $show->remember_token('Remember token');
+        $show->id('Id');
+        $show->title('标题');
+        $show->content('内容');
+        //$show->type('Type');
+        $show->file('文件');
         $show->created_at('Created at');
         $show->updated_at('Updated at');
 
@@ -125,13 +120,13 @@ class UserController extends Controller
      */
     protected function form()
     {
-        $form = new Form(new User);
+        $form = new Form(new Info);
 
-        $form->text('contact', '联系人');
-        $form->email('email', '邮箱');
-        $form->password('password', '密码');
-        $form->number('phone', '手机号码');
-        $form->text('username', '用户名');
+        $form->text('title', '标题');
+        $form->textarea('content', '内容');
+        $form->hidden('type')->value(4);
+        //$form->number('type', 'Type');
+        $form->file('file', '文件上传');
 
         return $form;
     }

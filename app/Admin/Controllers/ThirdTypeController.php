@@ -2,16 +2,16 @@
 
 namespace App\Admin\Controllers;
 
-use App\User;
+use App\ThirdType;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
+use App\SecondType;
 
-
-class UserController extends Controller
+class ThirdTypeController extends Controller
 {
     use HasResourceActions;
 
@@ -24,7 +24,7 @@ class UserController extends Controller
     public function index(Content $content)
     {
         return $content
-            ->header('用户')
+            ->header('三级分类')
             ->description('')
             ->body($this->grid());
     }
@@ -80,15 +80,17 @@ class UserController extends Controller
      */
     protected function grid()
     {
-        $grid = new Grid(new User);
-
-        $grid->id('Id')->sortable();//可排序
-        $grid->username('用户名');
-        $grid->password('密码');
-        $grid->contact('联系人');
-        $grid->email('邮箱');
-        $grid->phone('电话号码');
-        $grid->remember_token('Remember token');
+        $grid = new Grid(new ThirdType);
+       
+        $grid->id('Id');
+        $grid->name('三级分类名称'); 
+        //$grid->type_id('Type id');
+        $grid->secondType('父级分类')->where('id', $grid->actions(function ($actions) 
+        {
+            // 当前行的数据数组
+            $id = $actions->secondtype_id;
+            return $id;
+        }))->get('name');
         $grid->created_at('Created at');
         $grid->updated_at('Updated at');
 
@@ -103,15 +105,12 @@ class UserController extends Controller
      */
     protected function detail($id)
     {
-        $show = new Show(User::findOrFail($id));
+        $show = new Show(ThirdType::findOrFail($id));
 
-        $show->id('Id')->sortable();//可排序
-        $show->username('用户名');
-        $show->password('密码');
-        $show->contact('联系人');
-        $show->email('邮箱');
-        $show->phone('电话号码');
-        $show->remember_token('Remember token');
+        $show->id('Id');
+        $show->name('Name');
+        $show->secondtype_id('Secondtype id');
+        $show->type_id('Type id');
         $show->created_at('Created at');
         $show->updated_at('Updated at');
 
@@ -125,14 +124,12 @@ class UserController extends Controller
      */
     protected function form()
     {
-        $form = new Form(new User);
+        $form = new Form(new ThirdType);
 
-        $form->text('contact', '联系人');
-        $form->email('email', '邮箱');
-        $form->password('password', '密码');
-        $form->number('phone', '手机号码');
-        $form->text('username', '用户名');
-
+        $form->text('name', '三级分类名称');
+        $form->select('secondtype_id','父级分类')->options('api/thirdtype');
+        //$form->number('secondtype_id', 'Secondtype id');
+        //$form->number('type_id', 'Type id');
         return $form;
     }
 }
