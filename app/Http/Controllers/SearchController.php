@@ -172,7 +172,6 @@ class SearchController extends BaseController
                  }
             }
         }
-        dd($allTypeName);
         return $this->returnMsg('200','ok',$allTypeName);
     }
     // public function a(){
