@@ -19,5 +19,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('/thirdtype',function(){
-    return SecondType::get(['id','name']);
+    $types = SecondType::where('id','>',0)->get(['id','name']);
+    foreach ($types as $k=>$v){
+       $data[] = array(
+           'id' => $v['id'],
+           'text' => $v['name']
+       );
+    }
+    return($data);
 });
