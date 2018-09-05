@@ -81,16 +81,11 @@ class ThirdTypeController extends Controller
     protected function grid()
     {
         $grid = new Grid(new ThirdType);
-       
+        
         $grid->id('Id');
         $grid->name('三级分类名称'); 
         //$grid->type_id('Type id');
-        $grid->secondType('父级分类')->where('id', $grid->actions(function ($actions) 
-        {
-            // 当前行的数据数组
-            $id = $actions->secondtype_id;
-            return $id;
-        }))->get('name');
+        $grid->secondType('父级分类')->name();
         $grid->created_at('Created at');
         $grid->updated_at('Updated at');
 
