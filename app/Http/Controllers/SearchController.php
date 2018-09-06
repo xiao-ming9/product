@@ -174,9 +174,8 @@ class SearchController extends BaseController
                 $name = $typeName[$i-1];
                 $allTypeName[$name] += [$v->name=>[]]; 
                 $thirdTypes = $v->thirdType;
-                foreach($thirdTypes as $thirdType){
-                    array_push($$allTypeName[$name][$v->name][],$thirdType);
-                     //$allTypeName[$name][$v->name] += [$thirdType->name;
+                foreach($thirdTypes as $v2){
+                    $allTypeName[$name][$v->name] += [$v2->name];
                  }
             }
         }
