@@ -135,6 +135,7 @@ class SearchController extends BaseController
         }
     }
 
+
     /**
      * 商品详情
      */
@@ -145,7 +146,12 @@ class SearchController extends BaseController
             return $this->returnMsg('5005','lack param id');
         }
         $good = Good::findOrFail($id);
-        return $this->returnMsg('200','ok',$good);
+        $table = $good->table()->get(['table_value','table_key']);
+        if($table->isEmpty()){
+            return $this->returnMsg('200','ok',$good);
+        }else{
+            return $this->returnMsg('200','ok',['good'=>$good,'good_table'=>$table]);
+        }
     }
 
     /**

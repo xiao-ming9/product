@@ -18,7 +18,19 @@ use App\ThirdType;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
 Route::get('/thirdtype',function(){
+    $types = ThirdType::where('id','>',0)->get(['id','name']);
+    foreach ($types as $k=>$v){
+       $data[] = array(
+           'id' => $v['id'],
+           'text' => $v['name']
+       );
+    }
+    return($data);
+});
+
+Route::get('/secondtype',function(){
     $types = SecondType::where('id','>',0)->get(['id','name']);
     foreach ($types as $k=>$v){
        $data[] = array(

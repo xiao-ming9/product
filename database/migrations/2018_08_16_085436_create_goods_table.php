@@ -26,8 +26,6 @@ class CreateGoodsTable extends Migration
             $table->string('characteristic')->nullable();
             $table->string('standard')->nullable();
             $table->string('img')->nullable();
-            $table->string('table_key')->nullable();
-            $table->string('table_value')->nullable();
             $table->timestamps();
         });
     }

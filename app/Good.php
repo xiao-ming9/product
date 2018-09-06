@@ -19,4 +19,8 @@ class Good extends Model
     {
         return $this->belongsTo('App\ThirdType','thirdtype_id');
     }
+    public function table()
+    {
+        return $this->hasMany('App\GoodTable','good_id');
+    }
 }

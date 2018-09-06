@@ -12,7 +12,6 @@ Route::group([
 
     $router->get('/', 'HomeController@index');
     $router->resource('users',UserController::class);
-    //$router->resource('infos',InfoController::class);
     $router->resource('notice',NoticeController::class);
     $router->resource('tech',TechController::class);
     $router->resource('web',WebController::class);
@@ -21,4 +20,6 @@ Route::group([
     $router->resource('type',FirstTypeController::class);
     $router->resource('secondtype',SecondTypeController::class);
     $router->resource('thirdtype',ThirdTypeController::class);
+    $router->resource('good',GoodController::class);
+    $router->resource('table',TableController::class);
 });

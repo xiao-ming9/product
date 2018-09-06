@@ -2,16 +2,15 @@
 
 namespace App\Admin\Controllers;
 
-use App\ThirdType;
+use App\GoodTable;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
-use App\SecondType;
 
-class ThirdTypeController extends Controller
+class TableController extends Controller
 {
     use HasResourceActions;
 
@@ -24,7 +23,7 @@ class ThirdTypeController extends Controller
     public function index(Content $content)
     {
         return $content
-            ->header('三级分类')
+            ->header('商品表格')
             ->description('')
             ->body($this->grid());
     }
@@ -54,7 +53,7 @@ class ThirdTypeController extends Controller
     public function edit($id, Content $content)
     {
         return $content
-            ->header('编辑')
+            ->header('修改')
             ->description('')
             ->body($this->form()->edit($id));
     }
@@ -80,12 +79,11 @@ class ThirdTypeController extends Controller
      */
     protected function grid()
     {
-        $grid = new Grid(new ThirdType);
-        
+        $grid = new Grid(new GoodTable);
         $grid->id('Id');
-        $grid->name('三级分类名称'); 
-        //$grid->type_id('Type id');
-        $grid->secondType('父级分类')->name('父级分类');
+        $grid->good('商品名称')->name('商品名称');
+        $grid->table_key('Table key');
+        $grid->table_value('Table value');
         $grid->created_at('Created at');
         $grid->updated_at('Updated at');
 
@@ -100,12 +98,12 @@ class ThirdTypeController extends Controller
      */
     protected function detail($id)
     {
-        $show = new Show(ThirdType::findOrFail($id));
-
+        $show = new Show(GoodTable::findOrFail($id));
+        
         $show->id('Id');
-        $show->name('Name');
-        $show->secondtype_id('Secondtype id');
-        $show->type_id('Type id');
+        $show->good_id('Good id');
+        $show->table_key('Table key');
+        $show->table_value('Table value');
         $show->created_at('Created at');
         $show->updated_at('Updated at');
 
@@ -119,11 +117,12 @@ class ThirdTypeController extends Controller
      */
     protected function form()
     {
-        $form = new Form(new ThirdType);
+        $form = new Form(new GoodTable);
 
-        $form->text('name', '三级分类名称');
-        $form->select('secondtype_id','父级分类')->options('/api/secondtype');
-        //$form->number('secondtype_id', 'Secondtype id');
+        $form->number('good_id', 'Good id');
+        $form->text('table_key', 'Table key');
+        $form->text('table_value', 'Table value');
+
         return $form;
     }
 }

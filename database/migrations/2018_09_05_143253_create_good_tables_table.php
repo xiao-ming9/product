@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateThirdTypesTable extends Migration
+class CreateGoodTablesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateThirdTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('third_types', function (Blueprint $table) {
+        Schema::create('good_tables', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->integer('secondtype_id');
+            $table->string('table_key');
+            $table->string('table_value');
+            $table->integer('good_id');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateThirdTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('third_types');
+        Schema::dropIfExists('good_tables');
     }
 }
