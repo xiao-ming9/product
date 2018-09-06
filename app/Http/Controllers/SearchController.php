@@ -52,6 +52,7 @@ class SearchController extends BaseController
      */
     public function search(Request $request)
     {
+        $name = $request->query('name','');
         $type = $request->query('type','');             //一级分类
         $secondType = $request->query('second_type','');//二级分类
         $thirdType = $request->query('third_type','');  //三级分类
@@ -59,6 +60,7 @@ class SearchController extends BaseController
         $shape = $request->query('shape','');           //形状
         $capacity = $request->query('capacity','');     //容量
         $category = $request->query('category','');     //类别
+        
         
         if((!empty($type))&&(!empty($secondType))){
             $type_id = Type::where('name',$type)->first()->id;
@@ -76,6 +78,9 @@ class SearchController extends BaseController
         }
         if(!empty($brand)){
             $goods = $goods->where('brand',$brand);
+        }
+        if(!empty($name)){
+            $goods = $goods->where('name','like',$name);
         }
         if($type_id <= 2){
             if(!empty($shape)){

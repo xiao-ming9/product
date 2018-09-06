@@ -22,4 +22,7 @@ Route::group([
     $router->resource('thirdtype',ThirdTypeController::class);
     $router->resource('good',GoodController::class);
     $router->resource('table',TableController::class);
+    $router->resource('apply',ApplyController::class);
+    $router->resource('connect',ConnectController::class);
+    $router->resource('skill',SkillController::class);
 });
