@@ -160,6 +160,7 @@ class SearchController extends BaseController
     public function type()
     {
         $allTypeName = [];
+        $typeName = [];
         $type = Type::all();
         foreach($type as $v){
             $typeName[] = $v->name;
