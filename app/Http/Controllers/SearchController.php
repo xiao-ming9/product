@@ -19,7 +19,7 @@ class SearchController extends BaseController
         if(!$name){
             return $this->returnMsg(5005,'lack param name');
         }
-        $goods = Good::where('name','like','%'.$name.'%')->paginata(30);
+        $goods = Good::where('name','like','%'.$name.'%')->paginate(30);
         //获取所有二级分类
         $types = [];
         //获取所有品牌
