@@ -9,6 +9,6 @@ class GoodTable extends Model
     //
     public function good()
     {
-        return $this->belongsTo('App\Good','good_id');
+        return $this->belongsTo('App\Good','good_id','id');
     }
 }
