@@ -8,6 +8,6 @@ class SecondType extends Model
 {
     public function thirdType()
     {
-        return $this->hasMany('App\ThirdType','secondtype_id');
+        return $this->hasMany('App\ThirdType','secondtype_id','id');
     }
 }
