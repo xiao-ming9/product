@@ -19,7 +19,7 @@ Route::get('/', function () {
 Route::post('/register','UserController@register');
 
 //用户登录
-Route::post('/login','UserController@login');
+Route::post('/login','AuthController@login');
 
 //用户注销登录
 Route::get('/logout','UserController@logout');
