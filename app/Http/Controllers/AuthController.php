@@ -24,7 +24,7 @@ class AuthController extends Controller
     {
         $credentials = [
             'username' => $request->input('username'),
-            'password' => $ruquest->input('password')
+            'password' => $request->input('password')
         ];
 
         if (! $token = auth()->attempt($credentials)) {
